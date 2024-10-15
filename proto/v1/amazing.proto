@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package amazing.v1;
+
+import "proto/v1/common/utils.proto";
+
+message Product {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  int32 stock = 5;
+}
+
+message InventoryRequest {
+  string store_id = 1;
+  repeated Product products = 2;
+}
+
+message InventoryResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+service AmazingService {
+  rpc AddProduct(InventoryRequest) returns (InventoryResponse);
+  rpc UpdateProduct(InventoryRequest) returns (InventoryResponse);
+  rpc GetInventory(InventoryRequest) returns (InventoryResponse);
+}
